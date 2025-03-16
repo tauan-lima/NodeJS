@@ -15,5 +15,4 @@ export async function jsonHandler(req,res) {
     res.writeHead(400).end("Erro ao processar requisição")
   }
   //Difine o Headler de resposta como JSON
-  res.setHeader('Content-Type', 'application/json')
 }
