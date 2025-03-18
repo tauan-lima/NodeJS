@@ -1,17 +1,29 @@
-import {jsonHandler} from './middlewares/jsonHandler.js'
 export const routes = [
   {
-    method: 'GET',
-    path: '/products',
-    controller: (res, req)=>{
-      res.end(JSON.stringify(res.body))
+    method: "GET",
+    path: "/user",
+    controller: ({req,res, database}) => {
+     const user = database.select('user')
+     if (!user) {
+       res.writeHead(404).end('Usuário não encontrado')} else {
+      res.writeHead(200).end(JSON.stringify(user))}
     }
   },
   {
-    method: 'POST',
-    path: '/products',
-    controller: (res, req)=>{
-      console.log(res.body)
+    method: "POST", 
+    path: "/user",
+    controller: ({req,res, database}) => {
+      const {name, CPF} = req.body
+      database.insert('user', {name, CPF})
+      return res.writeHead(201).end()
+    }
+  },
+  {
+    method: "DELETE",
+    path: "/user",
+    controller: ({req,res, database}) => {
+      database.delete('user', req.body)
+      return res.writeHead(202).end('Deletado')
     }
   }
 ]
