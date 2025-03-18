@@ -9,9 +9,6 @@ export async function jsonHandler(req, res) {
   }
 
   //Concatenação dos pedaços de dados. Em seguida converte de string para JSON
-  
-
-
   try{
     req.body = JSON.parse(Buffer.concat(buffers).toString());
   } catch (error) {
